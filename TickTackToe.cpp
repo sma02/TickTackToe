@@ -3,7 +3,7 @@
 #include <conio.h>
 using namespace std;
 const int gridSize = 3;
-bool player = false;
+bool player = true;
 int blocksOccupied = 0;
 short playerColor = 0x3;
 char board[gridSize][gridSize] = {{' ', ' ', ' '},
@@ -113,7 +113,8 @@ void init()
     setColor(0x7);
     system("cls");
     printBoard(20, 5);
-    player = false;
+    player = true;
+    playerColor = 0x4;
     blocksOccupied = 0;
     for (int i = 0; i < 3; i++)
     {
@@ -135,6 +136,7 @@ int main()
         {
             gotoxy(50, 6);
             cout << "Player ";
+            playerColor = 0x4;
             setColor(playerColor);
             cout << "X";
             setColor(0x7);
@@ -144,6 +146,7 @@ int main()
         {
             gotoxy(50, 6);
             cout << "Player ";
+            playerColor = 0x3;
             setColor(playerColor);
             cout << "O";
             setColor(0x7);
@@ -195,7 +198,6 @@ void placeSymbol(bool &playerType, int offsetX, int offsetY)
     y = 2 - (choice / 3);
     if (board[y][x] == ' ')
     {
-        playerType = !playerType;
         blocksOccupied++;
         if (playerType)
         {
@@ -211,6 +213,7 @@ void placeSymbol(bool &playerType, int offsetX, int offsetY)
         }
         gotoxy(offsetX + (x * 3) + 1, offsetY + (y * 2));
         cout << board[y][x];
+        playerType = !playerType;
         setColor(0x7);
     }
 }
